@@ -25,10 +25,16 @@ python mongo_imp.py {TABLE_NAME} {PARRELLEL_CNT}
 
 [MYSQL_SOURCE]
 mysql_host=192.168.XXX.160
+
 mysql_port=XXXX
+
 user=root
+
 password=XXX
+
 db=XXDB
 
 [MONGO_TARGET]
+
 mongo_url=mongodb://XXX:XXZXX@192.XXX.155.XXXX:25001/
+
