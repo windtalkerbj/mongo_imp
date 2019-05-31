@@ -11,13 +11,18 @@ data migration tool(From mysql to mongo)
 
 
 2，设计要点
+
   进程级并行处理，按PK(自增INT64)和并发数对PK做范围分区（想法来自使用SQOOP向HDFS导入MYSQL数据）
   
 
-3,启动说明 python mongo_imp.py {TABLE_NAME} {PARRELLEL_CNT}
+3,启动说明 
+
+python mongo_imp.py {TABLE_NAME} {PARRELLEL_CNT}
 
 
 4,配置说明（db.cfg）
+
+
 [MYSQL_SOURCE]
 mysql_host=192.168.XXX.160
 mysql_port=XXXX
