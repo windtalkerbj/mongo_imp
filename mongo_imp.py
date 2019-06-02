@@ -149,7 +149,12 @@ def mysql_2_mongo(iIdx,table_meta_dict,mysql_cfg_dict,mongo_url):
                             if value is None:
                                 aDict[key] = 0
                             else:
-                                aDict[key] = float(value)    
+                                aDict[key] = float(value) 
+                        elif 'date' == tmp_dict['data_type']:
+                            #datetime.datetime.combine(value, datetime.time.min)  %H:%M:%S"    
+                            aDict[key] =  value.strftime("%Y-%m-%d"+" 00:00:00")
+                    #logger.debug('id=%d,account_date=%s',aDict['TFR_DTL_ACCOUNT_ID'], aDict['ACCOUNTING_DATE'])
+                    
                 time_3 = time.perf_counter()
                 logger.debug('Data transform,time=%f',time_3-time_2)
                 #ADD TO MONGO
@@ -159,7 +164,8 @@ def mysql_2_mongo(iIdx,table_meta_dict,mysql_cfg_dict,mongo_url):
                     wr_result = _mongo_tb.bulk_write(queries)
                     logger.debug('InsertCnt=%d MatchCnt=%d',wr_result.inserted_count,wr_result.matched_count)
                     iImported += wr_result.inserted_count
-                logger.debug('Data import MONGO,time=%f',time_4-time_3)    
+                logger.debug('Data import MONGO,time=%f',time_4-time_3)
+                    
     except Exception as exc:
         logger.error('Exception[%s]=%s',type(exc),exc)
         return -1
